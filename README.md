@@ -35,11 +35,17 @@ First run
 6. Run the report as needed.
 
 7. For automated report generation, you can look installing Cygwin on Windows and using Cron (both Linux and Mac OS X have cron by default).
+8. 
+
 ========================================
 SETTINGS customization:
 ========================================
+
+
 See here for instructions on how to find these values:
 http://www.kongregate.com/forums/65-tyrant/topics/257875-last-guide-auto-factions-net-dmg
+
+
 ========================================
 REPORT:format character map
 ========================================
@@ -81,11 +87,11 @@ Char | Reported Value    | Notes/Description
 
 OTHER OPTIONS:
 
-:aliases should contain a path to a file containing user names/nicknames for members of your faction, mapped
+```:aliases``` should contain a path to a file containing user names/nicknames for members of your faction, mapped
 to their user ids in the JSON format. If you don't have one of these files but would like to use one, set
-:aliases to true and a template will be generated for you when you run the script. You can then
+```:aliases``` to ```true``` and a template will be generated for you when you run the script. You can then
 modify the template names to your preferred aliases for each faction member. Remember to update the value
-of :aliases to contain the path to the file once it has been generated!
+of ```:aliases``` to contain the path to the file once it has been generated!
 
 :output should contain the file path to which you want your report output. If an argument is supplied to the script
 when it is run, that argument will take precedence over the value stored in :output. If no value is supplied for
@@ -95,14 +101,16 @@ has been identified as needed to change and will probably do so in a few version
 ========================================
 Previous Version: 
 
-1.6.2  |   http://pastebin.com/Dqn01GYa
-1.6.1  |   http://pastebin.com/5QcYuBpd
-1.6.0  |   http://pastebin.com/JmA9dZs4
-1.5.4  |   http://pastebin.com/7hpmi7nd
+Version |  URL
+--------|------------------------------
+1.6.2   |  http://pastebin.com/Dqn01GYa
+1.6.1   |  http://pastebin.com/5QcYuBpd
+1.6.0   |  http://pastebin.com/JmA9dZs4
+1.5.4   |  http://pastebin.com/7hpmi7nd
 
 ========================================
 Changelog
 
 * Liscenced under a very liberal MIT liscence.  This is basically how I treated the code, however this does require that the liscence be included in all future branches.
-* Fixed some issues with duplicate_client_id. Will now automatically fetch valid client code and update data if this error is retrieved.
+* Fixed some issues with ```duplicate_client_id```. Will now automatically fetch valid client code and update data if this error is retrieved.
 * Seperated each class into it's own file.  This will make managing the growing code base far easier.
