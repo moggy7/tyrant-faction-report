@@ -1,6 +1,40 @@
 TYRANT Faction Report Script
 ========================================
-Code version 1.6.3
+Code version 1.7.0
+========================================
+First run
+
+1. Run ```ruby main.rb```
+
+2. On your first run, 2 folders will be created, cache and configuration.
+
+3. Open the config/settings.yml. It will probably look something like:
+```---
+:flashcode: ''
+:faction_id: ''
+:user_id: ''
+:game_auth_token: ''
+:facebook: false
+:client_id:
+:user_agent: Ruby Net Point Script 1.7.0
+```
+
+4. Find your flashcode, user_id, and game_auth_token.  Everything will be automatically filled in.  Read SETTINGS customization for help.
+
+5. Configure Reports
+	A. For Local Reports
+		- Open "config/report.yml"
+		- Set it up how you like.
+		- Make sure output has a filename to save to.
+	B. For uploading to Google Docs.
+		- Make sure you have the ```google_drive``` gem installed. (```gem install google_drive```)
+		- Open "config/spreadsheet.yml"
+		- Add your Google user name and password (it will be stored in plaintext).
+		- Find the spreadsheet key (it is a very long and unweildly mess).
+
+6. Run the report as needed.
+
+7. For automated report generation, you can look installing Cygwin on Windows and using Cron (both Linux and Mac OS X have cron by default).
 ========================================
 SETTINGS customization:
 ========================================
@@ -55,6 +89,20 @@ of :aliases to contain the path to the file once it has been generated!
 
 :output should contain the file path to which you want your report output. If an argument is supplied to the script
 when it is run, that argument will take precedence over the value stored in :output. If no value is supplied for
-:output and no argument is supplied to the script, the report will simply be output to the command line.
+:output and no argument is supplied to the script, the report will simply be output to the command line.  This behavior
+has been identified as needed to change and will probably do so in a few version (currently written 1.7.0).
 
 ========================================
+Previous Version: 
+
+1.6.2  |   http://pastebin.com/Dqn01GYa
+1.6.1  |   http://pastebin.com/5QcYuBpd
+1.6.0  |   http://pastebin.com/JmA9dZs4
+1.5.4  |   http://pastebin.com/7hpmi7nd
+
+========================================
+Changelog
+
+* Liscenced under a very liberal MIT liscence.  This is basically how I treated the code, however this does require that the liscence be included in all future branches.
+* Fixed some issues with duplicate_client_id. Will now automatically fetch valid client code and update data if this error is retrieved.
+* Seperated each class into it's own file.  This will make managing the growing code base far easier.
