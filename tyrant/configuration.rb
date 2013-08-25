@@ -8,7 +8,7 @@ class Configuration
     :game_auth_token => '',
     :facebook => false,
     :client_id => nil,
-	:user_agent => "Ruby Net Point Script 1.7.0"
+	:user_agent => "Ruby Net Point Script 1.7.1"
   }
 
   SPREADSHEET = {

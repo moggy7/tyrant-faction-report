@@ -1,6 +1,6 @@
 TYRANT Faction Report Script
 ========================================
-Code version 1.7.0
+Code version 1.7.1
 ========================================
 First run
 
@@ -16,7 +16,7 @@ First run
 :game_auth_token: ''
 :facebook: false
 :client_id:
-:user_agent: Ruby Net Point Script 1.7.0
+:user_agent: Ruby Net Point Script 1.7.1
 ```
 
 4. Find your flashcode, user_id, and game_auth_token.  Everything will be automatically filled in.  Read SETTINGS customization for help.
@@ -73,13 +73,17 @@ Char | Reported Value    | Notes/Description
 -----|-------------------|-------------------------------------------------------------------------------------
   Xa | Battles Initiated | the number of times the user clicked either Fight or Surge
   Xd | Net Damage        | the total damage the player dealt to opposing faction, minus the damage they took
+  Xf | Damage For        | the total damage the player dealt to opposing faction
+  Xg | Damage Against    | the total damage the player took
    i | User ID           | the unique ID given by the Tyrant client for each user
   Xl | Loyalty Gain      | the amount of loyalty the player gained (this is equal to their win count)
    n | Name              | the name of the user (if you supply a file to REPORT_FORMAT:aliases, the name from that file)
+   o | Rank              | the rank of the user in faction
   Xp | Win %             | the percentage of battles won over total battles fought, including defensive battles
    q | Last Login        | the number of days ago that the user last logged in
   Xr | Total Losses      | the total number of battles the user lost
   Xs | Approx. Surge %   | an estimate of the percentage of the time the user chose Surge instead of Fight
+   t | Last Claim        | the number of days ago that the user claimed tokens
    u | Total Loyalty     | the total loyalty points accumulated by the user since joining the faction
    v | Level             | the user's level at the time the report is generated
   Xw | Total Wins        | the total number of battles won, including defensive battles
@@ -103,6 +107,7 @@ Previous Version:
 
 Version |  URL
 --------|------------------------------
+1.6.3   |  http://pastebin.com/ssBesK9z
 1.6.2   |  http://pastebin.com/Dqn01GYa
 1.6.1   |  http://pastebin.com/5QcYuBpd
 1.6.0   |  http://pastebin.com/JmA9dZs4
@@ -110,6 +115,13 @@ Version |  URL
 
 ========================================
 Changelog
+
+1.7.1
+
+* Updated logic so the report functions
+* Added report values
+
+1.7.0
 
 * Liscenced under a very liberal MIT liscence.  This is basically how I treated the code, however this does require that the liscence be included in all future branches.
 * Fixed some issues with ```duplicate_client_id```. Will now automatically fetch valid client code and update data if this error is retrieved.

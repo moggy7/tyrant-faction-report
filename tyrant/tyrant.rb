@@ -26,8 +26,9 @@ class Tyrant
       "User-Agent" => @config.settings[:user_agent],
       "Accept" => "*/*",
       "Accept-Charset" => "ISO-8859-1,utf-8;q=0.7,*;q=0.3",
-      "Accept-Encoding" => "gzip",
-      "Accept-Language" => "en-US",
+      "Accept-Encoding" => "gzip,deflate,sdch",
+      "Accept-Language" => "en-US,en;q=0.8",
+      "Connection" => "keep-alive",
       "Referer" => "http://#{@path}/Main.swf?#{@version}",
       "Content-Type" => "application/x-www-form-urlencoded"
     }
@@ -49,7 +50,7 @@ class Tyrant
 
     path = "/api.php?user_id=#{@user_id}&message=#{message}"
     data = "flashcode=#{@flash_code}&time=#{time}&version=#{@version}&hash=#{hash}&ccache=&client_code=#{@client_code}"
-    data << "&game_auth_token=#{@game_auth_token}" unless @facebook
+    data << "&game_auth_token=#{@game_auth_token}&rc=2" unless @facebook
     params.each{|key, value| data << "&#{key}=#{value}"}
 
     response = connection.cached_request(path, data, @headers, key)
@@ -93,7 +94,9 @@ class Tyrant
         :name => member['name'],
         :level => member['level'],
         :last_activity => member['last_active_day'],
-        :loyalty => member['loyalty']
+        :loyalty => member['loyalty'],
+        :token_claim => member['conquest_claimed'],
+        :rank => member['permission_level']
       )
     end
     faction

@@ -5,13 +5,17 @@ class FactionMember
   CHARACTER_MAP = {
     'a' => {:description => 'Battles Initiated',  :method => :battles,          :format => '%05d'},
     'd' => {:description => 'Net Damage',         :method => :net_damage,       :format => '%07d'},
+    'f' => {:description => 'Points Won',         :method => :damage_dealt,     :format => '%05d'},
+    'g' => {:description => 'Points Against',     :method => :damage_taken,     :format => '%05d'},
     'l' => {:description => 'Loyalty Gain',       :method => :wins,             :format => '%05d'},
     'i' => {:description => 'User ID',            :method => :id,               :format => '%d'},
     'n' => {:description => 'Name',               :method => :name,             :format => '%s'},
+    'o' => {:description => 'Rank',               :method => :rank,             :format => '%s'},
     'p' => {:description => 'Win %',              :method => :win_percentage,   :format => '%06.2f%'},
     'q' => {:description => 'Last Login',         :method => :last_login,       :format => '%03d days ago'},
     'r' => {:description => 'Total Losses',       :method => :losses,           :format => '%05d'},
-    's' => {:description => 'Approx. Surge %',    :method => :surge_percentage, :format => '%06.2f%'},
+    's' => {:description => 'Est. Surge %',       :method => :surge_percentage, :format => '%06.2f%'},
+    't' => {:description => 'Last Claim',         :method => :token_claim,      :format => '%04.1f days ago'},
     'u' => {:description => 'Total Loyalty',      :method => :loyalty,          :format => '%05d'},
     'v' => {:description => 'Level',              :method => :level,            :format => '%03d'},
     'w' => {:description => 'Total Wins',         :method => :wins,             :format => '%05d'}
@@ -23,6 +27,8 @@ class FactionMember
     @level = params[:level].to_i
     @last_activity = params[:last_activity].to_i
     @loyalty = params[:loyalty].to_i
+    @token_claim = params[:token_claim].to_i
+    @rank = params[:rank].to_i
 
     @wars = []
     @stats = []
@@ -102,6 +108,23 @@ class FactionMember
 
   def loyalty _
     @loyalty
+  end
+  
+  def rank _
+    case @rank
+    when 1
+      return 'Member'
+    when 2
+      return 'Officer'
+    when 3
+      return 'Leader'
+    when 4
+      return 'Warmaster'
+    end
+  end
+  
+  def token_claim _
+    (Time.now - Time.at(@token_claim))/86400
   end
 
   def name _
