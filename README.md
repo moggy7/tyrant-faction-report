@@ -1,6 +1,6 @@
 TYRANT Faction Report Script
 ========================================
-Code version 1.7.1
+Code version 1.7.2
 ========================================
 First run
 
@@ -16,7 +16,7 @@ First run
 :game_auth_token: ''
 :facebook: false
 :client_id:
-:user_agent: Ruby Net Point Script 1.7.1
+:user_agent: Ruby Net Point Script 1.7.2
 ```
 
 4. Find your flashcode, user_id, and game_auth_token.  Everything will be automatically filled in.  Read SETTINGS customization for help.
@@ -72,9 +72,13 @@ Level, Net Damage (for the last year), Total Wins (for the last month), Battles 
 Char | Reported Value    | Notes/Description
 -----|-------------------|-------------------------------------------------------------------------------------
   Xa | Battles Initiated | the number of times the user clicked either Fight or Surge
+  Xb | Damage For        | the total damage the player dealt to opposing faction
+  Xc | Damage Against    | the total damage the player took
   Xd | Net Damage        | the total damage the player dealt to opposing faction, minus the damage they took
-  Xf | Damage For        | the total damage the player dealt to opposing faction
-  Xg | Damage Against    | the total damage the player took
+  Xe | Total Wins (Atk)  | the total number of battles won as attacker
+  Xf | Total Losses (Atk)| the total number of battles lost as attacker
+  Xg | Total Wins (Def)  | the total number of battles won as defender
+  Xh | Total Losses (Def)| the total number of battles lost as defender
    i | User ID           | the unique ID given by the Tyrant client for each user
   Xl | Loyalty Gain      | the amount of loyalty the player gained (this is equal to their win count)
    n | Name              | the name of the user (if you supply a file to REPORT_FORMAT:aliases, the name from that file)
@@ -107,6 +111,7 @@ Previous Version:
 
 Version |  URL
 --------|------------------------------
+1.7.0   |  http://pastebin.com/RFDwZ3hg
 1.6.3   |  http://pastebin.com/ssBesK9z
 1.6.2   |  http://pastebin.com/Dqn01GYa
 1.6.1   |  http://pastebin.com/5QcYuBpd
@@ -114,7 +119,11 @@ Version |  URL
 1.5.4   |  http://pastebin.com/7hpmi7nd
 
 ========================================
-Changelog
+Changelog (git fork)
+
+1.7.2
+
+* Merged pastebin 1.7.0 changes so report functions with new format
 
 1.7.1
 

@@ -1,37 +1,39 @@
 # FactionRankings class to grab, organize, then export rankings data
 class FactionRankings
 
-  def self.data tyrant
+  def self.data config
+    tyrant = Tyrant.new(config.settings)
+    tyrant.connect
 
-    faction = tyrant.faction
-    maximum_days = tyrant.config.report[:format].split(' ').collect{ |days| days.to_i }.max
-    wars = tyrant.faction_wars(:days => maximum_days)
+    faction = tyrant.faction #get all faction members
+    maximum_days = config.report[:format].split(' ').collect{ |days| days.to_i }.max
+    wars = tyrant.faction_wars(:days => maximum_days) #get array of all matching wars
 
     today = Time.now.to_i
     wars.each do |war|
 
-      slot = (today - war['start_time'].to_i)/86400
+      slot = (today - war['start_time'].to_i)/86400 #slot war was "slot" days ago
 
-      tyrant.rankings(war).each do |rank|
-        member = faction.find_member(rank['user_id'])
+      tyrant.rankings(war).each do |rank| #reads info for this war from tyrant, then analyze this info
+        member = faction.find_member(rank['user_id']) #user id from war
         member.fight(rank, slot) unless member.nil?
       end
     end
 
 
-    sort = tyrant.config.report[:sort]
+    sort = config.report[:sort]
     method = FactionMember::CHARACTER_MAP[sort.pop][:method]
-    members = faction.members.sort{ |one, two| one.send(method, sort.to_i) <=> two.send(method, sort.to_i) }
-    members = members.reverse unless tyrant.config.report[:order] == 'asc'
+    members = faction.members.sort{ |one, two| one.send(method, sort.to_i) <=> two.send(method, sort.to_i) } #sort member list, normally by net damage 7d
+    members = members.reverse unless config.report[:order] == 'asc'
 
-    if tyrant.config.report[:aliases] == true
+    if config.report[:aliases] == true #allows to replace member names by aliases
       self.generate_aliases(members)
-    elsif tyrant.config.report[:aliases] && !tyrant.config.report[:aliases].empty?
-      self.load_aliases(faction, tyrant.config)
+    elsif config.report[:aliases] && !config.report[:aliases].empty?
+      self.load_aliases(faction, config)
     end
 
-    members.collect do |player|
-      player.to_s(tyrant.config.report[:format])
+    members.collect do |player| #returns new array with statistic info for each player
+      player.to_s(config.report[:format])
     end
   end
 
@@ -63,10 +65,10 @@ class FactionRankings
     "#{description}#{ " #{report}d" unless report.empty?}"
   end
 
-  def self.export filename, tyrant
+  def self.export filename #main starting point of this program
 
-    config = tyrant.config
-    data = self.data tyrant
+    config = Configuration.load #load configuration
+    data = self.data config #get stastic data for each member
 
     if config.spreadsheet[:key].empty?
       header = config.report[:format].split(' ').collect do |report|
@@ -84,8 +86,7 @@ class FactionRankings
       else
         puts "No detected filesave path. If you want to save to a file, please update config/spreadsheet.yaml or config/report.yml.\n\n"
         puts header
-
-        data.each{ |line| puts line }
+        data.each{ |line| puts line } # output to command line
       end
     else
       session = GoogleDrive.login(config.spreadsheet[:username], config.spreadsheet[:password])

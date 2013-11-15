@@ -20,6 +20,4 @@ unless !File.exists?('config/spreadsheet.yml') || Configuration.load.spreadsheet
   require 'google_drive'
 end
 
-tyrant = Tyrant.new
-
-FactionRankings.export(ARGV[0],tyrant)
+FactionRankings.export(ARGV[0])

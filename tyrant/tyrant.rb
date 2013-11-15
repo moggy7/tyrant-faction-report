@@ -71,7 +71,7 @@ class Tyrant
 
     path = "/api.php?user_id=#{@user_id}&message=#{message}"
     data = "?&flashcode=#{@flash_code}&time=#{time}&version=""&hash=#{hash}&ccache=#{ccache}"
-    data << "&game_auth_token=#{@game_auth_token}" unless @facebook
+    data << "&game_auth_token=#{@game_auth_token}&rc=2" unless @facebook
     response = connection.post2(path, data, @headers).body.inflate    # We don't want to cache this request
     json = JSON.parse(response)
     @client_code = json["client_code"]
@@ -81,6 +81,10 @@ class Tyrant
 	@config.settings[:faction_id] = @faction_id
 	@config.settings[:version] = @version
 	@config.save
+	if json["result"] != nil && json["result"] == false
+      puts "Warning: Connect Problem? #{json.to_s}"
+      raise "I give up and fail. Please clear /cache folder before you try again"
+    end
     return json
   end
 
@@ -88,6 +92,11 @@ class Tyrant
     json = self.fetch_collection 'getFactionMembers', "members.#{@faction_id}.#{Date.today}", { :faction_id => @faction_id }
     faction = Faction.new @faction_id
 
+	if json['members'] == nil
+      puts "Error. Could not find ['members'] #{json.to_s}"
+      return
+    end
+	
     json['members'].each do |key, member|
       faction.add_member(
         :id => member['user_id'],
