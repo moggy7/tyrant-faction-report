@@ -81,9 +81,10 @@ Char | Reported Value    | Notes/Description
   Xh | Total Losses (Def)| the total number of battles lost as defender
    i | User ID           | the unique ID given by the Tyrant client for each user
   Xl | Loyalty Gain      | the amount of loyalty the player gained (this is equal to their win count)
+  Xm | Win % (Def)       | the percentage of defensive battles won
    n | Name              | the name of the user (if you supply a file to REPORT_FORMAT:aliases, the name from that file)
    o | Rank              | the rank of the user in faction
-  Xp | Win %             | the percentage of battles won over total battles fought, including defensive battles
+  Xp | Win % (Atk)       | the percentage of initiated battles won
    q | Last Login        | the number of days ago that the user last logged in
   Xr | Total Losses      | the total number of battles the user lost
   Xs | Approx. Surge %   | an estimate of the percentage of the time the user chose Surge instead of Fight
