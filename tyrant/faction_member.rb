@@ -99,7 +99,7 @@ class FactionMember
 
   def surges days_ago
     # use a heuristic to determine the rough number of battles that are surges
-	# example 400 damage dealt in 10 'wins' battles => 10 Surges
+    # example 400 damage dealt in 10 'wins' battles => 10 Surges
     # however normalize this to total battles fought because otherwise
     # example 450 damage dealt in 10 'wins' battles and also total number of battles of '10' => 15 Surges while only 10 is max
     # therefore min of battles is used

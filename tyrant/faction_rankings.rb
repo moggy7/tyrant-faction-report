@@ -68,7 +68,7 @@ class FactionRankings
   def self.export filename #main starting point of this program
 
     config = Configuration.load #load configuration
-    data = self.data config #get stastic data for each member
+    data = self.data config #get statistic data for each member
 
     if config.spreadsheet[:key].empty?
       header = config.report[:format].split(' ').collect do |report|
@@ -90,7 +90,7 @@ class FactionRankings
       end
     else
       session = GoogleDrive.login(config.spreadsheet[:username], config.spreadsheet[:password])
-      ws = session.spreadsheet_by_key(config.spreadsheet[:key]).worksheets[0]
+      ws = session.spreadsheet_by_key(config.spreadsheet[:key]).add_worksheet(Time.now.to_s)
       config.report[:format].split(' ').each_with_index do |report, index|
         ws[1, index + 1] = header_string report
       end

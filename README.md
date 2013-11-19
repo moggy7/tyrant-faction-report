@@ -22,15 +22,15 @@ First run
 4. Find your flashcode, user_id, and game_auth_token.  Everything will be automatically filled in.  Read SETTINGS customization for help.
 
 5. Configure Reports
-	A. For Local Reports
-		- Open "config/report.yml"
-		- Set it up how you like.
-		- Make sure output has a filename to save to.
-	B. For uploading to Google Docs.
-		- Make sure you have the ```google_drive``` gem installed. (```gem install google_drive```)
-		- Open "config/spreadsheet.yml"
-		- Add your Google user name and password (it will be stored in plaintext).
-		- Find the spreadsheet key (it is a very long and unweildly mess).
+    A. For Local Reports
+        - Open "config/report.yml"
+        - Set it up how you like.
+        - Make sure output has a filename to save to.
+    B. For uploading to Google Docs.
+        - Make sure you have the ```google_drive``` gem installed. (```gem install google_drive```)
+        - Open "config/spreadsheet.yml"
+        - Add your Google user name and password (it will be stored in plaintext).
+        - Find the spreadsheet key (it is a very long and unweildly mess).
 
 6. Run the report as needed.
 
