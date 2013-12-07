@@ -90,7 +90,7 @@ class FactionRankings
       end
     else
       session = GoogleDrive.login(config.spreadsheet[:username], config.spreadsheet[:password])
-      ws = session.spreadsheet_by_key(config.spreadsheet[:key]).add_worksheet(Time.now.to_s)
+      ws = session.spreadsheet_by_key(config.spreadsheet[:key]).add_worksheet(Time.now.to_s, 51, 12)
       config.report[:format].split(' ').each_with_index do |report, index|
         ws[1, index + 1] = header_string report
       end
